@@ -1,0 +1,126 @@
+<p-toast></p-toast>
+
+<div class="layout-topbar">
+  <a class="layout-topbar-logo" routerLink="">
+    <!-- <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo"> -->
+    <span>primeNG</span>
+  </a>
+
+  <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+    <i class="pi pi-ellipsis-v"></i>
+  </button>
+
+  <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+    <button class="p-link layout-topbar-button">
+      <i class="pi pi-calendar"></i>
+      <span>Calendar</span>
+    </button>
+    <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
+      <i class="pi pi-user"></i>
+      <span>Profile</span>
+    </button>
+    <button class="p-link layout-topbar-button" (click)="sidebarVisible2 = true">
+      <i class="pi pi-cog"></i>
+      <span>Configurações</span>
+    </button>
+  </div>
+</div>
+
+<div id="configuracoes">
+  <p-sidebar [(visible)]="sidebarVisible2" position="right">
+    <ng-template pTemplate="header">
+      <h5 class="m-0 p-0"> <i class="pi pi-cog"></i> Configurações</h5>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <div>
+
+        <div>
+          <h6>
+            Escala
+            <span class="pl-2">
+              <p-tag>
+                <span style=" padding: 2px; ">
+                  {{scale}}
+                </span>
+              </p-tag>
+            </span>
+          </h6>
+          <div class="flex align-items-center pb-3">
+
+            <p-slider [(ngModel)]="scale" [min]="scales[0]" [max]="scales[scales.length - 1]" (ngModelChange)="incrementDecrementScale()" class="flex-grow flex-1 py-2"></p-slider>
+
+            <!-- <button icon="pi pi-minus" type="button" pButton pRipple (click)="decrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem mr-2" [disabled]="scale === scales[0]"></button>
+            <div class="flex gap-2 align-items-center">
+                <i class="pi pi-circle-fill text-300" *ngFor="let s of scales" [ngClass]="{'text-primary-500': s === scale}"></i>
+            </div>
+            <button icon="pi pi-plus"  type="button" pButton pRipple (click)="incrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem ml-2" [disabled]="scale === scales[scales.length - 1]"></button> -->
+          </div>
+        </div>
+
+        <div>
+          <h6>
+            Tema
+            <span class="pl-2">
+              <p-tag>
+                <i *ngIf="!checkedTheme" class="pi pi-sun" style=" padding: 2px; "></i>
+                <i *ngIf="checkedTheme" class="pi pi-moon" style=" padding: 2px; "></i>
+              </p-tag>
+            </span>
+
+          </h6>
+          <div class="flex justify-content-between align-items-center pb-3">
+            <label for="integeronly" class="flex justify-content-start align-items-center w-12 pr-5 pb-1">
+              {{checkedTheme == true ? "Escuro":"Claro"}}
+            </label>
+            <p-inputSwitch [(ngModel)]="checkedTheme" inputId="integeronly" (ngModelChange)="changeTheme(checkedTheme)"></p-inputSwitch>
+          </div>
+        </div>
+
+        <div>
+          <h6>Menu Tipo</h6>
+          <div class="flex pb-3">
+            <div class="field-radiobutton flex-1">
+                <p-radioButton name="menuMode" value="static" [(ngModel)]="menuMode" inputId="mode1"></p-radioButton>
+                <label for="mode1">Static</label>
+            </div>
+            <div class="field-radiobutton flex-1">
+                <p-radioButton name="menuMode" value="overlay" [(ngModel)]="menuMode" inputId="mode2"></p-radioButton>
+                <label for="mode2">Overlay</label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h6>Input Estilo</h6>
+          <div class="flex pb-3">
+            <div class="field-radiobutton flex-1">
+              <p-radioButton name="inputStyle" value="outlined" [(ngModel)]="inputStyle" inputId="outlined_input"></p-radioButton>
+              <label for="outlined_input">Outlined</label>
+            </div>
+            <div class="field-radiobutton flex-1">
+              <p-radioButton name="inputStyle" value="filled" [(ngModel)]="inputStyle" inputId="filled_input"></p-radioButton>
+              <label for="filled_input">Filled</label>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h6>Ripple Effect</h6>
+          <div class="flex pb-3">
+            <p-inputSwitch [(ngModel)]="ripple"></p-inputSwitch>
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button pButton pRipple (click)="showConfig()" [loading]="loading" class="w-12 justify-content-evenly">
+        Salvar configurações
+      </button>
+    </ng-template>
+  </p-sidebar>
+</div>

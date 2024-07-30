@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/layout/top-bar.css";
+@import "./assets/layout/menu.css";
+@import "./assets/layout/responsive.css";
+@import "./assets/layout/utils.css";
+@import "./assets/layout/typography.css";
+
+@import "primeng/resources/primeng.css";
+@import "../node_modules/primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
+
+:root{
+  --scale: 14px;
+  --borderRadius: 12px;
+  --transitionDuration: .2s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 14px;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--surface-ground);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.layout-wrapper {
+  min-height: 100vh;
+}
+
+.layout-main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+  padding: 6rem 1rem 1rem 2rem;
+  transition: margin-left var(--transitionDuration);
+}
+
+.layout-main {
+  flex: 1 1 auto;
+}
+
+/* Mixin para foco padrão */
+.focused {
+  outline: none;
+  outline-offset: 0;
+  transition: box-shadow var(--transitionDuration);
+  box-shadow: var(--focus-ring);
+}
+
+/* Mixin para foco com sombra interna */
+.focused-inset {
+  outline: none;
+  outline-offset: 0;
+  transition: box-shadow var(--transitionDuration);
+  box-shadow: inset var(--focus-ring);
+}
+
+.p-toast {
+  opacity: 1;
+}
+
+#configuracoes .p-sidebar{
+  border-radius: 6px 0px 0px 6px;
+}
